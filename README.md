@@ -1,43 +1,21 @@
-# S3_CRUD_buket
-Pagina estatica para manejar los archivos en un buket de Amazon S3
+﻿# S3_CRUD_buket
 
-Requisitos
--Modificar CORS en el buket
+Browser applications connect to AWS IoT using MQTT over the Secure WebSocket Protocol. 
+There are some important differences between Node.js and browser environments, so a few adjustments are 
+necessary when using this SDK in a browser application.
 
-<?xml version="1.0" encoding="UTF-8"?>
-<CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-<CORSRule>
-    <AllowedOrigin>*</AllowedOrigin>
-    <AllowedMethod>GET</AllowedMethod>
-    <AllowedMethod>PUT</AllowedMethod>
-    <AllowedMethod>POST</AllowedMethod>
-    <AllowedMethod>DELETE</AllowedMethod>
-    <MaxAgeSeconds>3000</MaxAgeSeconds>
-    <AllowedHeader>*</AllowedHeader>
-</CORSRule>
-</CORSConfiguration>
+1-Crear el archivo package.json con npm init
+2-Crear un archivo index.js y poner el codigo 
 
--Generar una politica para garantizar acceso a solo los recursos necesarios, generar un grupo y a ese grupo asociar la politca recien creada, despues generar un usuario y añadirlo al grup orecien creado. La politica quedó como:
+const IoT = require('aws-iot-device-sdk');
+module.exports.IoT = IoT;
 
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:Get*",
-        "s3:List*",
-        "s3:DeleteObject",
-        "s3:PutObject"
-      ],
-      "Resource": "*"
-    }
-  ]
-}
+3-Ejecutar el comando browserify index.js -o aws-iot-device-sdk-4-browser.js
+4-Importar el archivo en el archivo HTML <script src="aws-iot-device-sdk-4-browser.js"></script>
 
-Referencia:
-http://docs.aws.amazon.com/es_es/sdk-for-javascript/v2/developer-guide/s3-example-photo-album.html
 
-Herramientas
-http://awspolicygen.s3.amazonaws.com/policygen.html
-https://policysim.aws.amazon.com/home/index.jsp
+
+En el archivo index.js debajo de las lineas de codigo deberemos comenzar a escribir nuestro codigo de el aplicativo.
+
+-Se puede trabajar con el archivo index.html, pero para pruduccion habra que ejecutar el
+comando gulp
